@@ -1,25 +1,40 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Apr 8, 2014, 5:00:03 PM
-    Author     : Arkhitech
-*/
-
 .dropdown-menu{
-    background-color: #eee;
-    padding: 10px;
+    top: 6px !important;
+    background-color: #fff;
+    padding-left: 0px;
+    border: 1px solid #DDDDDD;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 3px 3px 3px 3px;
+    min-width: 100px;
 }
 .textcomplete-item{
     margin-left: 0;
     list-style: none;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    padding-top: 4px;
+    padding-left: 10px;
 }
 .textcomplete-item a{
     color: #169;
 }
 .active{
     color: #169;
-    text-decoration: underline;
+}
+.dropdown-menu li.active{
+    background-color: #169;
+    border-radius: 3px 3px 3px 3px;
+}
+.dropdown-menu li.active a{
+    color: white;
+}
+.dropdown-menu li:hover a{
+    background-color: #169;
+    border-radius: 3px 3px 3px 3px;
+    color: #fff;
+}
+.dropdown-menu li:hover{
+    background-color: #169;
+    border-radius: 3px 3px 3px 3px;
+    color: #fff;
 }
