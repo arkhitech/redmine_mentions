@@ -1,0 +1,6 @@
+
+<p>
+  <label for="settings[trigger]">Trigger</label>
+  <%= select_tag('settings[trigger]',
+                 options_for_select(['@',':','~','!','#','%'],settings['trigger'])) %>
+</p>
