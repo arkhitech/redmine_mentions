@@ -55,7 +55,7 @@
 <script>
   $('#mention').textcomplete([
     {
-      <%users= User.all.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
+      <%users= @project.users.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
       mentions: <%=  users.collect{|u| "#{u.login}"}.to_json.html_safe %>,
       match: new RegExp(<%=regex%>),
       search: function(term, callback) {
