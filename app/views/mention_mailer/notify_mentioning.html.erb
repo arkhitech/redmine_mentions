@@ -1,0 +1,9 @@
+<strong>You were mentioned by <%= @journal.user.login %> on <%=  @journal.created_on.to_s(:db) %></strong>
+<label>Context</label>
+<p>
+  <%= @journal.notes %>
+</p>
+<label>Subject</label>
+<%= @issue.subject %>
+<label>Project</label>
+<%= @issue.project.name %>
