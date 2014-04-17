@@ -38,3 +38,7 @@
     border-radius: 3px 3px 3px 3px;
     color: #fff;
 }
+.wiki-edit{
+    display:block;
+    width: 100%;
+}
