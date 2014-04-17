@@ -1,3 +1,0 @@
-= redmine_mentions
-
-Description goes here

@@ -13,6 +13,10 @@ By default '@' sign is used as the trigger for the mentioning, however the trigg
 Installation
 ==============
 To Install this plugin goto plugins in your redmine repository
+
 Clone the git repository: 
-    'git clone git@github.com:arkhitech/redmine_mentions.git'
-    Restart Redmine
+
+	git clone git@github.com:arkhitech/redmine_mentions.git
+        Restart Redmine
+       
+        
