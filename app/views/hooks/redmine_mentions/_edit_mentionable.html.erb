@@ -1,13 +1,18 @@
 <%= javascript_include_tag 'jquery.textcomplete.js', :plugin => 'redmine_mentions' %>
+<%= javascript_include_tag 'jquery.overlay.js', :plugin => 'redmine_mentions' %>
 <%= stylesheet_link_tag 'auto_complete.css', :plugin => 'redmine_mentions' %>
-<% regex = '/\B'+Setting.plugin_redmine_mentions['trigger']+'(\w*)$/'%>
+<% regex_find = '/\B'+Setting.plugin_redmine_mentions['trigger']+'(\w*)$/'%>
+
+
+<%users= @project.users.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
+<%users_regex=users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
+<% regex_highlight = '/\B('+users_regex+')/g' %>
 
 <script>
   $('#issue_notes').textcomplete([
     {
-      <%users= @project.users.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
-      mentions: <%=  users.collect{|u| "#{u.login}"}.to_json.html_safe %>,
-      match: new RegExp(<%=regex%>),
+      mentions: <%=  users.collect{|u| "#{u.firstname} #{u.lastname} - #{u.login}"}.to_json.html_safe %>,
+      match: new RegExp(<%=regex_find%>),
       search: function(term, callback) {
         callback($.map(this.mentions, function(mention) {
           return mention.indexOf(term) === 0 ? mention : null;
@@ -15,7 +20,15 @@
       },
       index: 1,
       replace: function(mention) {
-        return '<%=Setting.plugin_redmine_mentions['trigger']%>'+ mention + ' ';
+        var parts = mention.split(' - ');
+        return '<%=Setting.plugin_redmine_mentions['trigger']%>' + parts[1] + ' ';
+      }
+    }
+  ]).overlay([
+    {
+      match: new RegExp(<%=regex_highlight%>),
+      css: {
+        'background-color': '#C6D5F3',
       }
     }
   ]);
