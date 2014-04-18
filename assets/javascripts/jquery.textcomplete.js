@@ -372,7 +372,7 @@
         var i, l, strategy, match;
         for (i = 0, l = this.strategies.length; i < l; i++) {
           strategy = this.strategies[i];
-          match = text.match(strategy.match);
+          match = text.toLowerCase().match(strategy.match);
           if (match) { return [strategy, match[strategy.index]]; }
         }
         return [];
