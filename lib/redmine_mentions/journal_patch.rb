@@ -16,7 +16,7 @@ module RedmineMentions
             mentioned_users.each do |mentioned_user|
               username = mentioned_user.first[1..-1] # Remove the heading '@'
               if user = User.find_by_login(username)
-                MentionMailer.notify_mentioning(issue, self, user)
+                MentionMailer.notify_mentioning(issue, self, user).deliver
               end
             end
           end

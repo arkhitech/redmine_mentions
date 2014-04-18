@@ -9,6 +9,6 @@ class MentionMailer < ActionMailer::Base
   def notify_mentioning(issue, journal, user)
     @issue = issue
     @journal = journal
-    mail(to: user.mail, subject: "You were mentioned in a note").deliver
+    mail(to: user.mail, subject: "You were mentioned in a note")
   end
 end
