@@ -1,9 +1,9 @@
-<strong>You were mentioned by <%= @journal.user.login %> on <%=  @journal.created_on.to_s(:db) %></strong>
-<label>Context</label>
-<p>
-  <%= @journal.notes %>
-</p>
-<label>Subject</label>
-<%= @issue.subject %>
-<label>Project</label>
-<%= @issue.project.name %>
+<h4><%= link_to "#{@issue.subject} (#{@issue.project.name})", issue_url(@issue) %></h4>
+
+<br /><br />
+
+<i>You were mentioned by <strong><%= @journal.user.login %></strong> on <strong><%=  @journal.created_on.to_s(:db) %></strong></i>
+
+<br /><br />
+
+<p><%= @journal.notes %></p>
