@@ -8,7 +8,7 @@
 <%users_regex=users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
 <% regex_highlight = '/\B('+users_regex+')/g' %>
 <script>
-  $('#issue_notes').textcomplete([
+  $('#issue_notes,#issue_description').textcomplete([
     {
       mentions: <%=  users.collect{|u| "#{u.firstname} #{u.lastname} - <small>#{u.login}</small>".downcase}.to_json.html_safe %>,
       match: <%=regex_find%>,
