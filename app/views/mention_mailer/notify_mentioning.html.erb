@@ -1,4 +1,4 @@
-<h4><%= link_to "#{@issue.subject} (#{@issue.project.name} - #{@issue.id})", issue_url(@issue) %></h4>
+<h4><%= link_to "[#{@issue.project.name} - #{@issue.tracker.name} ##{@issue.id}] #{@issue.subject}", issue_url(@issue) %></h4>
 
 <br /><br />
 
