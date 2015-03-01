@@ -73,7 +73,7 @@
       overlay: '<div class="textoverlay"></div>'
     };
 
-    css = {
+   /* css = {
       wrapper: {
         margin: 0,
         padding: 0,
@@ -91,7 +91,7 @@
         position: 'relative',
         outline: 0
       }
-    };
+    };*/
 
     // CSS properties transport from textarea to wrapper
     textareaToWrapper = ['display'];
