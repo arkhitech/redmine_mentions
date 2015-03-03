@@ -478,7 +478,7 @@
         // position above the element
         if(this.strategy.placement === 'top') {
           // Move it to be in line with the match character
-          fontSize = parseInt(this.$el.css('font-size'));
+            fontSize = parseInt(this.$el.css('font-size'));
           // Overwrite the position object to set the 'bottom' property instead of the top.
           position = {
             top: 'auto',
@@ -488,9 +488,13 @@
         } else {
           // Overwrite 'bottom' property because once `placement: 'top'`
           // strategy is shown, $el keeps the property.
-          position.bottom = 'auto';
+
+           position.top =   this.$el.parent().height() - position.top ;
+           position.marginTop= this.$el.parent().height() - position.top ;
         }
+
         this.$el.css(position);
+
         return this;
       },
 
@@ -584,3 +588,13 @@
   };
 
 })(window.jQuery || window.Zepto);
+
+$(".jstb_zenedit").on('click', function(){
+   margin = $(".textcomplete-wrapper").css("margin-left");
+    if(margin.indexOf("0")!== 0)
+    {
+        $(".textcomplete-wrapper").css("margin-left", "0px")
+    }
+    else
+        $(".textcomplete-wrapper").css("margin-left", "25%")
+})
