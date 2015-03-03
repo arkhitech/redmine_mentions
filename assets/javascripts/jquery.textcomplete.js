@@ -590,11 +590,15 @@
 })(window.jQuery || window.Zepto);
 
 $(".jstb_zenedit").on('click', function(){
-   margin = $(".textcomplete-wrapper").css("margin-left");
-    if(margin.indexOf("0")!== 0)
-    {
-        $(".textcomplete-wrapper").css("margin-left", "0px")
-    }
-    else
-        $(".textcomplete-wrapper").css("margin-left", "25%")
-})
+  klass = $(this).attr('class');
+  if(klass.indexOf('theme')===-1)
+   {
+      margin = $(".textcomplete-wrapper").css("margin-left");
+      if(margin.indexOf("0")!== 0)
+      {
+          $(".textcomplete-wrapper").css("margin-left", "0px");
+      }
+      else
+          $(".textcomplete-wrapper").css("margin-left", "25%");
+   }
+});

@@ -72,7 +72,7 @@
       wrapper: '<div class="textoverlay-wrapper"></div>',
       overlay: '<div class="textoverlay"></div>'
     };
-
+    css = {}
    /* css = {
       wrapper: {
         margin: 0,
