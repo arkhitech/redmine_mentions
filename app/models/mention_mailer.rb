@@ -1,4 +1,8 @@
 class MentionMailer < ActionMailer::Base
+  include Redmine::I18n
+
+  helper_method :format_time
+
   layout 'mailer'
   default from: Setting.mail_from
   def self.default_url_options
@@ -9,6 +13,7 @@ class MentionMailer < ActionMailer::Base
   def notify_mentioning(issue, journal, user)
     @issue = issue
     @journal = journal
-    mail(to: user.mail, subject: "[#{@issue.tracker.name} ##{@issue.id}] You were mentioned in: #{@issue.subject}")
+    subject = "[#{issue.project.to_s} - #{issue.tracker.name} ##{issue.id}] (#{issue.status.name}) #{issue.subject}"
+    mail(to: user.mail, subject: subject)
   end
 end

@@ -1,6 +1,6 @@
-[<%= @issue.project.name %> - <%= @issue.tracker.name %> #<%= @issue.id %>] <%= @issue.subject %>
-<%= issue_url(@issue) %>
+You've been mentioned by <%= @journal.user %> on <%=  format_time @journal.created_on %>
 
-You were mentioned by <%= @journal.user.login %> on <%=  @journal.created_on.to_s(:db) %>
+<%= @issue.tracker.name %> #<%= @issue.id %>: <%= @issue.subject %>
+Access at: <%= issue_url(@issue) %>
 
 <%= @journal.notes %>
