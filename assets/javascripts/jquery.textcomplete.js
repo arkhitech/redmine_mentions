@@ -594,10 +594,12 @@ $(".jstb_zenedit").on('click', function(){
   if($(this).parents('.jstEditor').attr('class').indexOf("zen")===-1) // not fullscreen
   {
     $("textarea").css("margin-left", "0%");
+    $("textarea").prev().css("margin-left", "0%");
   }
   else
   {
     $("textarea").css("margin-left", "25%");
+    $("textarea").prev().css("margin-left", "25%");
   }
 });
 
