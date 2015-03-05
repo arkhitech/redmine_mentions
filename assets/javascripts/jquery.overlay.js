@@ -72,8 +72,8 @@
       wrapper: '<div class="textoverlay-wrapper"></div>',
       overlay: '<div class="textoverlay"></div>'
     };
-    css = {}
-   /* css = {
+
+    css = {
       wrapper: {
         margin: 0,
         padding: 0,
@@ -84,14 +84,14 @@
         color: 'transparent',
         'white-space': 'pre-wrap',
         'word-wrap': 'break-word',
+        display: 'none',
         overflow: 'hidden'
       },
       textarea: {
-        background: 'transparent',
         position: 'relative',
         outline: 0
       }
-    };*/
+    };
 
     // CSS properties transport from textarea to wrapper
     textareaToWrapper = ['display'];

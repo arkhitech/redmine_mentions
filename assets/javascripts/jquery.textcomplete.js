@@ -590,15 +590,22 @@
 })(window.jQuery || window.Zepto);
 
 $(".jstb_zenedit").on('click', function(){
-  klass = $(this).attr('class');
-  if(klass.indexOf('theme')===-1)
-   {
-      margin = $(".textcomplete-wrapper").css("margin-left");
-      if(margin.indexOf("0")!== 0)
-      {
-          $(".textcomplete-wrapper").css("margin-left", "0px");
-      }
-      else
-          $(".textcomplete-wrapper").css("margin-left", "25%");
-   }
+
+  if($(this).parents('.jstEditor').attr('class').indexOf("zen")===-1) // not fullscreen
+  {
+    $("textarea").css("margin-left", "0%");
+  }
+  else
+  {
+    $("textarea").css("margin-left", "25%");
+  }
 });
+
+document.onkeydown = function(evt) {
+  evt = evt || window.event;
+  if (evt.keyCode == 27) {
+    $('.jstEditor.zen').removeClass('zen');
+    $('html.zen').removeClass('zen');
+    $("textarea").css("margin-left", "0px");
+  }
+};
