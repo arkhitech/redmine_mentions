@@ -1,7 +1,8 @@
 class MentionMailer < ActionMailer::Base
   include Redmine::I18n
+  include ApplicationHelper
 
-  helper_method :format_time
+  helper_method :format_time, :textilizable
 
   layout 'mailer'
   default from: Setting.mail_from

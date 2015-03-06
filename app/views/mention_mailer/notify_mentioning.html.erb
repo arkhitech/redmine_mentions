@@ -1,4 +1,4 @@
 You've been mentioned by <strong><%= @journal.user %></strong> on <strong><%=  format_time @journal.created_on %></strong>
 <hr />
 <h1><%= link_to "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}", issue_url(@issue) %></h1>
-<p><%= @journal.notes %></p>
+<p><%= textilizable(@journal, :notes, :only_path => false) %></p>
