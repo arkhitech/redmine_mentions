@@ -2,5 +2,5 @@ You've been mentioned by <strong><%= @journal.user %></strong> on <strong><%=  f
 <hr />
 
 <h1><%= link_to "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}", issue_url(@issue) %></h1>
-<% binding.pry %>
+
  <p><%= textilizable(@journal, :notes, :only_path => false) %></p>
