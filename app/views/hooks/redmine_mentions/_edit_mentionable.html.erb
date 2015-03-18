@@ -8,7 +8,7 @@
 <%users_regex=users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
 <% regex_highlight = '/\B('+users_regex+')/g' %>
 <script>
-  jQuery(window).load(function() {
+  $(document).ready(function() {
   $('#issue_notes,#issue_description').textcomplete([
     {
       mentions: <%=  users.collect{|u| "#{u.firstname} #{u.lastname} - <small>#{u.login}</small>".downcase}.to_json.html_safe %>,
@@ -29,7 +29,7 @@
     {
       match: new RegExp(<%=regex_highlight%>),
       css: {
-        'background-color': '#C6D5F3',
+        'background-color': '#C6D5F3'
       }
     }
   ])
