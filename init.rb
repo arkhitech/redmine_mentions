@@ -15,17 +15,3 @@ Redmine::Plugin.register :redmine_mentions do
   author_url 'http://www.arkhitech.com/'
   settings :default => {'trigger' => '@'}, :partial => 'settings/mention'
 end
-class SecondHelperIssuesHook < Redmine::Hook::ViewListener
-
-  def helper_issues_show_detail_after_setting(context={})
-    if context[:detail].prop_key == 'color'
-      detail = context[:detail]
-      detail.value = "no_color" if detail.value.nil? or detail.value.empty?
-      detail.old_value = "no_color" if detail.old_value.nil? or detail.old_value.empty?
-
-      context[:detail].value = l(("label_agile_color_" + detail.value.to_s).to_sym).downcase if detail.value
-      context[:detail].old_value = l(("label_agile_color_" + detail.old_value.to_s).to_sym).downcase if detail.old_value
-    end
-  end
-
-end
