@@ -1,3 +1,6 @@
 # English strings go here for Rails i18n
 en:
-  # my_label: "My label"
+  field_color: Color
+  label_agile_color_no_colors: No colors
+  label_agile_color_no_color: No color
+  label_agile_color_no color: No color

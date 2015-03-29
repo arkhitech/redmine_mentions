@@ -3,7 +3,8 @@ module RedmineMentions
     def self.included(base)
       base.class_eval do
         after_create :send_mail
-        
+        before_create :check_colors
+
         def send_mail
           if self.journalized.is_a?(Issue) && self.notes.present?
             issue = self.journalized
@@ -20,6 +21,10 @@ module RedmineMentions
               end
             end
           end
+        end
+
+        def check_colors
+          details.reject!{|d| d.property == 'attr' and d.prop_key == 'color' and d.old_value.to_s.empty? and d.value.to_s.empty? }
         end
       end
     end
