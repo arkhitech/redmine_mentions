@@ -3,7 +3,9 @@ require 'redmine'
 Rails.configuration.to_prepare do
   require_dependency 'redmine_mentions/hooks'
   require_dependency 'journal'
+  require_dependency 'issue'
   Journal.send(:include, RedmineMentions::JournalPatch)
+  Issue.send(:include, RedmineMentions::IssuePatch)
 end
 Redmine::Plugin.register :redmine_mentions do
   name 'Redmine Mentions'

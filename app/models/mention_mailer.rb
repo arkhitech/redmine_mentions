@@ -6,9 +6,10 @@ class MentionMailer < ActionMailer::Base
   end
   
   
-  def notify_mentioning(issue, journal, user)
+  def notify_mentioning(issue, mentioned_by, mentioned_text, mentioned_user)
     @issue = issue
-    @journal = journal
-    mail(to: user.mail, subject: "[#{@issue.tracker.name} ##{@issue.id}] You were mentioned in: #{@issue.subject}")
+    @mentioned_by = mentioned_by
+    @mentioned_text = mentioned_text
+    mail(to: mentioned_user.mail, subject: "[#{@issue.tracker.name} ##{@issue.id}] #{@mentioned_by} mentioned you in the issue: #{@issue.subject}")
   end
 end

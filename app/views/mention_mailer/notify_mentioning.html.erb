@@ -1,9 +1,7 @@
 <h4><%= link_to "[#{@issue.project.name} - #{@issue.tracker.name} ##{@issue.id}] #{@issue.subject}", issue_url(@issue) %></h4>
 
 <br /><br />
+<%= @mentioned_by %> just mentioned you on the issue <%= link_to "[#{@issue.project.name} - #{@issue.tracker.name} ##{@issue.id}] #{@issue.subject}", issue_url(@issue) %>
 
-<i>You were mentioned by <strong><%= @journal.user.login %></strong> on <strong><%=  @journal.created_on.to_s(:db) %></strong></i>
 
-<br /><br />
-
-<p><%= @journal.notes %></p>
+<p style="background-color: grey;" ><%= @mentioned_text %></p>
