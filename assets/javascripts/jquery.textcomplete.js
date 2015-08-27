@@ -122,6 +122,8 @@
     };
     css = {
       wrapper: {
+        lineHeight: '1.25em',
+        clear: 'left',
         position: 'relative'
       },
       // Removed the 'top' property to support the placement: 'top' option
