@@ -108,6 +108,7 @@
       'font-family',
       'font-weight',
       'font-size',
+      'width',
       'background-color'
     ];
 
