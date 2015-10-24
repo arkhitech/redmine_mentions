@@ -1,5 +1,4 @@
 .dropdown-menu{
-    top: 6px !important;
     background-color: #fff;
     padding-left: 0px;
     border: 1px solid #DDDDDD;
@@ -8,12 +7,11 @@
     min-width: 100px;
 }
 .textcomplete-item{
+    cursor: pointer;
     margin-left: 0;
     list-style: none;
     border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-    padding-top: 4px;
-    padding-left: 10px;
+    padding: 5px 15px;
 }
 .textcomplete-item a{
     color: #169;
