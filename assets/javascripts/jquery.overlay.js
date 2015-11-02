@@ -94,7 +94,7 @@
     };
 
     // CSS properties transport from textarea to wrapper
-    textareaToWrapper = ['display'];
+    // textareaToWrapper = ['display'];
     // CSS properties transport from textarea to overlay
     textareaToOverlay = [
       'margin-top',
