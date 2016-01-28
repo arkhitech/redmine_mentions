@@ -94,7 +94,7 @@
     };
 
     // CSS properties transport from textarea to wrapper
-    textareaToWrapper = ['display'];
+    // textareaToWrapper = ['display'];
     // CSS properties transport from textarea to overlay
     textareaToOverlay = [
       'margin-top',
@@ -108,8 +108,7 @@
       'font-family',
       'font-weight',
       'font-size',
-      'width',
-      'background-color'
+      'width'
     ];
 
     function Overlay($textarea) {
