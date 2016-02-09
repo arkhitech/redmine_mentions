@@ -22,8 +22,17 @@
     color: white;
 }
 
+.jstEditor {
+    clear: both;
+}
+
+.textoverlay-wrapper {
+    width: 100%;
+}
+
 .textoverlay {
     line-height: normal;
+    width: 95%;
 }
 
 
