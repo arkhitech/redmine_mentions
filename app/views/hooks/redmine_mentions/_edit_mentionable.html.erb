@@ -9,7 +9,7 @@
   <% users = User.active.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
 <% end %>
 <% users_regex = users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
-<% regex_highlight = '/\B('+users_regex+')/g' %>
+<% regex_highlight = '/\B('+users_regex+')\b/g' %>
 <script>
   $('#issue_notes,#issue_description').textcomplete([
     {
