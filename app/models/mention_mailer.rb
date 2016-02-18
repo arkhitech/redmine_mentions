@@ -9,7 +9,7 @@ class MentionMailer < ActionMailer::Base
   
   def notify_mentioning(issue, mentioned_by, mentioned_text, mentioned_user)
     @issue = issue
-    @mentioned_by = mentioned_by
+    @mentioned_by = mentioned_user.name
     @mentioned_html = textilizable(mentioned_text)
     @mentioned_text = mentioned_text
     mail(to: mentioned_user.mail, subject: "[#{@issue.tracker.name} ##{@issue.id}] #{@mentioned_by} mentioned you in the issue: #{@issue.subject}")
