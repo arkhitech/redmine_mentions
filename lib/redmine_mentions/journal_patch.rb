@@ -2,9 +2,9 @@ module RedmineMentions
   module JournalPatch
     def self.included(base)
       base.class_eval do
-        after_create :send_notification
+        after_create :send_notification_to_mentioned
         
-        def send_notification
+        def send_notification_to_mentioned
           if self.journalized.is_a?(Issue) && self.notes.present?
             issue = self.journalized
             project=self.journalized.project
