@@ -4,13 +4,13 @@
 <% regex_find = '/\B'+Setting.plugin_redmine_mentions['trigger']+'(\w*)$/i'%>
 
 
-<%users= @project.users.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
-<%users_regex=users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
-<% regex_highlight = '/\B('+users_regex+')/g' %>
+<% users = @project.users.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)} %>
+<% users_regex = users.collect{|u| "\"#{Regexp.escape(u.firstname + ' ' + u.lastname)}\":[^ ]*\\b#{u.id}"}.join('|') %>
+<% regex_highlight = '/\B('+users_regex+')\b/g' %>
 <script>
   $('#issue_notes,#issue_description').textcomplete([
     {
-      mentions: <%=  users.collect{|u| "#{u.firstname} #{u.lastname} - <small>#{u.login}</small>"}.to_json.html_safe %>,
+      mentions: <%= users.collect{|u| "#{u.firstname} #{u.lastname}<small>#{" - " + u.mail unless u.pref.hide_mail}</small><!-- #{URI.join(home_url, user_path(u)).to_s} -->"}.to_json.html_safe %>,
       match: <%=regex_find%>,
       search: function(term, callback) {
         callback($.map(this.mentions, function(mention) {
@@ -19,9 +19,9 @@
       },
       index: 1,
       replace: function(mention) {
-        var parts = mention.split(' - ');
-        var name = parts[1].substring(parts[1].lastIndexOf("<small>")+7,parts[1].lastIndexOf("</small>"));
-        return '<%=Setting.plugin_redmine_mentions['trigger']%>' + name + ' ';
+        var fullname = mention.split('<small>')[0];
+        var user = mention.substring(mention.lastIndexOf("<!-- ")+5,mention.lastIndexOf(" -->"));
+        return '"' + fullname + '":' + user;
       }
     }
   ]).overlay([
