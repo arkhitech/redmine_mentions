@@ -1,9 +1,6 @@
 <h4><%= link_to "[#{@issue.project.name} - #{@issue.tracker.name} ##{@issue.id}] #{@issue.subject}", issue_url(@issue) %></h4>
-
-<br /><br />
-
+<br>
 <i>You were mentioned by <strong><%= @journal.user.login %></strong> on <strong><%=  @journal.created_on.to_s(:db) %></strong></i>
-
-<br /><br />
-
-<p><%= @journal.notes %></p>
+<br><br>
+<div style="background-color: lightgrey;"><%= @htmlnote %></div>
+<br>
