@@ -1,4 +1,5 @@
 class MentionMailer < ActionMailer::Base
+  include ApplicationHelper
   layout 'mailer'
   default from: Setting.mail_from
 
@@ -13,6 +14,8 @@ class MentionMailer < ActionMailer::Base
   def notify_mentioning(issue, journal, user)
     @issue = issue
     @journal = journal
+    @htmlnote = textilizable(journal.notes)
+    @textnote = ActionView::Base.full_sanitizer.sanitize(@htmlnote)
     mail(to: user.mail, subject: "[#{@issue.tracker.name} ##{@issue.id}] You were mentioned in: #{@issue.subject}")
   end
 end
