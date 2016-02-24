@@ -670,8 +670,10 @@ if (typeof jQuery === 'undefined') {
 
     _enter: function (e) {
       var datum = this.data[parseInt(this._getActiveElement().data('index'), 10)];
+      debugger;
       this.completer.select(datum.value, datum.strategy, e);
       this.deactivate();
+      console.log('_enter');
     },
 
     _pageup: function () {
@@ -971,6 +973,7 @@ if (typeof jQuery === 'undefined') {
 
     _onKeyup: function (e) {
       if (this._skipSearch(e)) { return; }
+      console.log('Text from head to caret >> ' + this.getTextFromHeadToCaret());
       this.completer.trigger(this.getTextFromHeadToCaret(), true);
     },
 
@@ -1026,6 +1029,7 @@ if (typeof jQuery === 'undefined') {
     // Update the textarea with the given value and strategy.
     select: function (value, strategy, e) {
       var pre = this.getTextFromHeadToCaret();
+      console.log('PRE ' + pre);
       var post = this.el.value.substring(this.el.selectionEnd);
       var newSubstr = strategy.replace(value, e);
       if (typeof newSubstr !== 'undefined') {
@@ -1115,6 +1119,8 @@ if (typeof jQuery === 'undefined') {
 
     select: function (value, strategy, e) {
       var pre = this.getTextFromHeadToCaret();
+      console.log('PRE ' + pre);
+
       var post = this.el.value.substring(pre.length);
       var newSubstr = strategy.replace(value, e);
       if (typeof newSubstr !== 'undefined') {
@@ -1167,7 +1173,10 @@ if (typeof jQuery === 'undefined') {
     // Update the content with the given value and strategy.
     // When an dropdown item is selected, it is executed.
     select: function (value, strategy, e) {
+      debugger;
       var pre = this.getTextFromHeadToCaret();
+
+      console.log('PRE ' + pre);
       var sel = this.$el[0].ownerDocument.getSelection()
       var range = sel.getRangeAt(0);
       var selection = range.cloneRange();
