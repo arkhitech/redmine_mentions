@@ -2,5 +2,5 @@
 <br>
 <i>You were mentioned by <strong><%= "#{@journal.user.firstname} #{@journal.user.lastname}" %></strong> on <strong><%= @journal.created_on.to_s(:db) %></strong></i>
 <br><br>
-<div style="background-color: lightgrey;"><%= @htmlnote %></div>
+<div style="background-color: lightgrey;"><%= textilizable(@journal, :notes, :only_path => false) %></div>
 <br>
