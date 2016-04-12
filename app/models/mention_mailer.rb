@@ -19,7 +19,7 @@ class MentionMailer < ActionMailer::Base
   def notify_mentioning(issue, journal, user)
     @issue = issue
     @journal = journal
-    @textnote = ActionView::Base.full_sanitizer.sanitize(@htmlnote)
-    mail(to: user.mail, subject: "[#{@issue.tracker.name} ##{@issue.id}] You were mentioned in: #{@issue.subject}")
+    @textnote = ActionView::Base.full_sanitizer.sanitize(journal.notes)
+    mail(to: user.mail, subject: "[#{@issue.tracker.name} ##{@issue.id}] #{l(:mentioned_in)}: #{@issue.subject}")
   end
 end

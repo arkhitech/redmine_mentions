@@ -1,6 +1,6 @@
 [<%= @issue.project.name %> - <%= @issue.tracker.name %> #<%= @issue.id %>] <%= @issue.subject %>
 <%= issue_url(@issue) %>
 
-You were mentioned by <%= "#{@journal.user.firstname} #{@journal.user.lastname}" %> on <%= @journal.created_on.to_s(:db) %>
+<%= "#{l(:mentioned_by)} #{@journal.user.firstname} #{@journal.user.lastname} #{l(:mentioned_on)} #{@journal.created_on.to_s(:db)}" %>
 
 <%= @textnote %>
