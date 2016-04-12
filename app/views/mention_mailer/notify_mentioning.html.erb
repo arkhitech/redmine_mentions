@@ -1,6 +1,6 @@
 <h4><%= link_to "[#{@issue.project.name} - #{@issue.tracker.name} ##{@issue.id}] #{@issue.subject}", issue_url(@issue) %></h4>
 <br>
-<i>You were mentioned by <strong><%= "#{@journal.user.firstname} #{@journal.user.lastname}" %></strong> on <strong><%= @journal.created_on.to_s(:db) %></strong></i>
+<i><%= l(:mentioned_by) %> <strong><%= "#{@journal.user.firstname} #{@journal.user.lastname}" %></strong> <%= l(:mentioned_on) %> <strong><%= @journal.created_on.to_s(:db) %></strong></i>
 <br><br>
 <div style="background-color: lightgrey;"><%= textilizable(@journal, :notes, :only_path => false) %></div>
 <br>
