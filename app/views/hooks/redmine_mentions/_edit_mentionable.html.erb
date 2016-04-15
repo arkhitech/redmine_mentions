@@ -17,7 +17,7 @@
       match: <%=regex_find%>,
       search: function(term, callback) {
         callback($.map(this.mentions, function(mention) {
-          return mention.toLowerCase().indexOf(term) !== -1 ? mention : null;
+          return mention.toLowerCase().indexOf(term.toLowerCase()) !== -1 ? mention : null;
         }));
       },
       index: 1,
