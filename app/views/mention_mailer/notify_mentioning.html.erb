@@ -6,4 +6,4 @@
 
 <br /><br />
 
-<p><%= @journal.notes %></p>
+<%= textilizable(@journal, :notes, {:headings => false, :only_path => false}) -%>
