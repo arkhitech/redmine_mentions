@@ -47,9 +47,11 @@
    * Function for escaping strings to HTML interpolation.
    */
   var escape = function (str) {
-    return str.replace(entityRegexe, function (match) {
-      return entityMap[match];
-    })
+    if (typeof str !== 'undefined'){
+      return str.replace(entityRegexe, function (match) {
+        return entityMap[match];
+      })
+    }
   };
 
   /**
@@ -173,7 +175,7 @@
 
       renderTextOnOverlay: function () {
         var text, i, l, strategy, match, style;
-        text = escape(this.$textarea.val());
+        text = $('<div></div>').text(this.$textarea.val());
 
         // Apply all strategies
         for (i = 0, l = this.strategies.length; i < l; i++) {
@@ -189,11 +191,25 @@
           // Style attribute's string
           style = 'background-color:' + strategy.css['background-color'];
 
-          text = text.replace(match, function (str) {
-            return '<span style="' + style + '">' + str + '</span>';
+          text.contents().each(function () {
+            var text, html, str, prevIndex;
+            if (this.nodeType != Node.TEXT_NODE) return;
+            text = this.textContent;
+            html = '';
+            for (prevIndex = match.lastIndex = 0;; prevIndex = match.lastIndex) {
+              str = match.exec(text);
+              if (!str) {
+                if (prevIndex) html += escape(text.substr(prevIndex));
+                break;
+              }
+              str = str[0];
+              html += escape(text.substr(prevIndex, match.lastIndex - prevIndex - str.length));
+              html += '<span style="' + style + '">' + escape(str) + '</span>';
+            };
+            if (prevIndex) $(this).replaceWith(html);
           });
         }
-        this.$el.html(text);
+        this.$el.html(text.contents());
         return this;
       },
 
@@ -212,7 +228,7 @@
         this.$textarea.off('.overlay');
         $wrapper = this.$textarea.parent();
         $wrapper.after(this.$textarea).remove();
-        this.$textarea.data('overlay', void 0);
+        this.$textarea.removeData('overlay');
         this.$textarea = null;
       }
     });

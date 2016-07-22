@@ -3,18 +3,21 @@
 <%= stylesheet_link_tag 'auto_complete.css', :plugin => 'redmine_mentions' %>
 <% regex_find = '/\B'+Setting.plugin_redmine_mentions['trigger']+'(\w*)$/i'%>
 
-
-<%users= (@project && @project.users.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)}) || []%>
-<%users_regex=users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
-<% regex_highlight = '/\B('+users_regex+')/g' %>
+<% if @project %>
+  <% users = @project.users.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
+<% else %>
+  <% users = User.active.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
+<% end %>
+<% users_regex = users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
+<% regex_highlight = '/\B('+users_regex+')\b/g' %>
 <script>
   $('#issue_notes,#issue_description').textcomplete([
     {
-      mentions: <%=  users.collect{|u| "#{u.firstname} #{u.lastname} - <small>#{u.login}</small>".downcase}.to_json.html_safe %>,
+      mentions: <%=  users.collect{|u| "#{u.firstname} #{u.lastname} - <small>#{u.login}</small>"}.to_json.html_safe %>,
       match: <%=regex_find%>,
       search: function(term, callback) {
         callback($.map(this.mentions, function(mention) {
-          return mention.indexOf(term) === 0 ? mention : null;
+          return mention.toLowerCase().indexOf(term.toLowerCase()) !== -1 ? mention : null;
         }));
       },
       index: 1,
