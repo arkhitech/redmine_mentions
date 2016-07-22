@@ -4,7 +4,7 @@
 <% regex_find = '/\B'+Setting.plugin_redmine_mentions['trigger']+'(\w*)$/i'%>
 
 
-<%users= @project.users.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
+<%users= (@project && @project.users.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)}) || []%>
 <%users_regex=users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
 <% regex_highlight = '/\B('+users_regex+')/g' %>
 <script>
