@@ -11,7 +11,9 @@
 <% users_regex = users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
 <% regex_highlight = '/\B('+users_regex+')\b/g' %>
 <script>
-  $('#issue_notes,#issue_description').textcomplete([
+
+
+  textcompleteOptions = [
     {
       mentions: <%=  users.collect{|u| "#{u.firstname} #{u.lastname} - <small>#{u.login}</small>"}.to_json.html_safe %>,
       match: <%=regex_find%>,
@@ -27,12 +29,35 @@
         return '<%=Setting.plugin_redmine_mentions['trigger']%>' + name + ' ';
       }
     }
-  ]).overlay([
+  ];
+
+  textCompleteOverlayOptions = [
     {
       match: new RegExp(<%=regex_highlight%>),
       css: {
         'background-color': '#C6D5F3',
       }
     }
-  ]);
+  ];
+
+  $('#issue_notes,#issue_description').textcomplete(textcompleteOptions).overlay(textCompleteOverlayOptions);
+
+
+  if (typeof CKEDITOR != 'undefined') {
+    CKEDITOR.on("instanceReady", function(event)
+    {
+      $('#issue_edit_textarea iframe').each(function(index, element) {
+        // debugger;
+        if ($(element).data('mentionable-active') == 'yes') {
+          console.log('textcomplete is already on');
+          return;
+        }
+        $(element).data('mentionable-active', 'yes');
+        $(element).contents().find('body').textcomplete(textcompleteOptions); // overlay not working in this case
+        console.log('textcomplete is on');
+      })
+    });
+
+  }
+
 </script>
