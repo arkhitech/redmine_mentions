@@ -11,7 +11,7 @@
 <% users_regex = users.collect{|u| "#{Setting.plugin_redmine_mentions['trigger']}#{u.login}"}.join('|')%>
 <% regex_highlight = '/\B('+users_regex+')\b/g' %>
 <script>
-  $('#issue_notes,#issue_description').textcomplete([
+  var textcompleteOptions = [
     {
       mentions: <%=  users.collect{|u| "#{u.firstname} #{u.lastname} - <small>#{u.login}</small>"}.to_json.html_safe %>,
       match: <%=regex_find%>,
@@ -27,7 +27,9 @@
         return '<%=Setting.plugin_redmine_mentions['trigger']%>' + name + ' ';
       }
     }
-  ]).overlay([
+  ];
+
+  $('#issue_notes,#issue_description').textcomplete(textcompleteOptions).overlay([
     {
       match: new RegExp(<%=regex_highlight%>),
       css: {
@@ -35,4 +37,17 @@
       }
     }
   ]);
+
+  if (typeof CKEDITOR != 'undefined') {
+    CKEDITOR.on("instanceReady", function(event)
+    {
+      $('#issue_edit_textarea iframe').each(function(index, element) {
+        if ($(element).data('mentionable-active') == 'yes') {
+          return;
+        }
+        $(element).data('mentionable-active', 'yes');
+        $(element).contents().find('body').textcomplete(textcompleteOptions); // overlay not working in this case
+      })
+    });
+  }
 </script>
