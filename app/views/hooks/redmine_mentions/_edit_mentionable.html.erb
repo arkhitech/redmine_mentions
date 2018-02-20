@@ -4,9 +4,9 @@
 <% regex_find = '/\B'+Setting.plugin_redmine_mentions['trigger']+'(\w*)$/i'%>
 
 <% if @project %>
-  <% users = @project.users.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
+  <% users = @project.users.where(type: 'User').includes(:email_address).where.not(email_addresses: { address: nil }).includes(:preference) %>
 <% else %>
-  <% users = User.active.to_a.delete_if{|u| (u.type != 'User' || u.mail.empty?)}%>
+  <% users = User.active.where(type: 'User').includes(:email_address).where.not(email_addresses: { address: nil }).includes(:preference) %>
 <% end %>
 <% users_regex = users.collect{|u| "\"#{Regexp.escape("#{u.firstname} #{u.lastname}")}\":#{Setting.protocol}://#{Setting.host_name}#{user_path(u)}".gsub(/(["\/])/, '\\\\\1')}.join('|') %>
 <% regex_highlight = '/\B('+users_regex+')\b/g' %>
