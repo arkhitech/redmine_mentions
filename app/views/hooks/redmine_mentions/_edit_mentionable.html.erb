@@ -27,12 +27,16 @@
         return '<%=Setting.plugin_redmine_mentions['trigger']%>' + name + ' ';
       }
     }
-  ]).overlay([
-    {
-      match: new RegExp(<%=regex_highlight%>),
-      css: {
-        'background-color': '#C6D5F3',
-      }
-    }
   ]);
+  
+  if (typeof CKEDITOR == 'undefined') { //fix CKEditor compatibility issue
+    $('#issue_notes,#issue_description').overlay([
+      {
+        match: new RegExp(<%=regex_highlight%>),
+        css: {
+          'background-color': '#C6D5F3',
+        }
+      }
+    ]);
+  }
 </script>
