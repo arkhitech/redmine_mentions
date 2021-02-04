@@ -5,6 +5,7 @@ module RedmineMentions
         after_create :send_mail
         
         def send_mail
+          RequestStore.store[:redmine_mentions_notified] = false
           if self.journalized.is_a?(Issue) && self.notes.present?
             issue = self.journalized
             project=self.journalized.project
@@ -17,11 +18,22 @@ module RedmineMentions
               username = mentioned_user.first[1..-1]
               if user = User.find_by_login(username)
                 MentionMailer.notify_mentioning(issue, self, user).deliver
+                RequestStore.store[:redmine_mentions_notified] = true
               end
             end
           end
         end
+
       end
+    end
+  end
+end
+
+# Patch Journal notify to avoid double emails
+module JournalNotifyPatch
+  def send_notification
+    unless RequestStore.store[:redmine_mentions_notified]
+      super
     end
   end
 end
