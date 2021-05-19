@@ -77,6 +77,8 @@
 
     css = {
       wrapper: {
+        lineHeight: '1.25em',
+        clear: 'left',
         margin: 0,
         padding: 0,
         overflow: 'hidden'
@@ -110,6 +112,7 @@
       'font-family',
       'font-weight',
       'font-size',
+      'width',
       'background-color'
     ];
 

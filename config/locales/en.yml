@@ -1,3 +1,6 @@
 # English strings go here for Rails i18n
 en:
   # my_label: "My label"
+  mentioned_by: "You were mentioned by"
+  mentioned_in: "You were mentioned in"
+  mentioned_on: "on"
