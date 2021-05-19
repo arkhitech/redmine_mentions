@@ -22,8 +22,19 @@
     color: white;
 }
 
+.jstEditor {
+    clear: both;
+}
+
+
+.textoverlay-wrapper textarea {
+    width: 99%;
+}
+
+
 .textoverlay {
     line-height: normal;
+    width: 99%;
 }
 
 
