@@ -89,14 +89,14 @@
         overflow: 'hidden'
       },
       textarea: {
-        background: 'transparent',
+        /*background: 'transparent',*/
         position: 'relative',
         outline: 0
       }
     };
 
     // CSS properties transport from textarea to wrapper
-    textareaToWrapper = ['display'];
+    textareaToWrapper = [''];
     // CSS properties transport from textarea to overlay
     textareaToOverlay = [
       'margin-top',
@@ -109,8 +109,7 @@
       'padding-left',
       'font-family',
       'font-weight',
-      'font-size',
-      'background-color'
+      'font-size'
     ];
 
     function Overlay($textarea) {
