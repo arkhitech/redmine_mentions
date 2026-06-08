@@ -1,6 +1,6 @@
-<%= javascript_include_tag 'jquery.textcomplete.js', :plugin => 'redmine_mentions' %>
-<%= javascript_include_tag 'jquery.overlay.js', :plugin => 'redmine_mentions' %>
-<%= stylesheet_link_tag 'auto_complete.css', :plugin => 'redmine_mentions' %>
+<%= javascript_include_tag 'jquery.textcomplete.js', plugin: 'redmine_mentions' %>
+<%= javascript_include_tag 'jquery.overlay.js', plugin: 'redmine_mentions' %>
+<%= stylesheet_link_tag 'auto_complete.css', plugin: 'redmine_mentions' %>
 <% regex_find = '/\B'+Setting.plugin_redmine_mentions['trigger']+'([\wа-яё\.\-]*)$/i'%>
 
 <% if @project %>

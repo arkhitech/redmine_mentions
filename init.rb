@@ -1,10 +1,16 @@
 require 'redmine'
 
-Rails.configuration.to_prepare do
-  require_dependency 'redmine_mentions/hooks'
-  require_dependency 'journal'
+def load_redmine_mentions_patches
+  require_relative 'lib/redmine_mentions/hooks'
   Journal.send(:include, RedmineMentions::JournalPatch)
 end
+
+load_redmine_mentions_patches
+
+Rails.configuration.to_prepare do
+  load_redmine_mentions_patches
+end
+
 Redmine::Plugin.register :redmine_mentions do
   name 'Redmine Mentions'
   author 'Arkhitech'
