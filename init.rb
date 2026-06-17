@@ -3,6 +3,8 @@ require 'redmine'
 def load_redmine_mentions_patches
   require_relative 'lib/redmine_mentions/hooks'
   Journal.send(:include, RedmineMentions::JournalPatch)
+  Journal.prepend JournalNotifyPatch
+
 end
 
 load_redmine_mentions_patches
